@@ -17,22 +17,6 @@ installPackages() {
   done
 }
 
-install_hyprpanel() {
-  echo ">>> Do you want to use HyprPanel (very nice bar from Jas-SinghFSU/HyprPanel)?"
-  local ans=$(gum choose "Yes" "No")
-  if [[ "$ans" == "Yes" ]]; then
-    yay -S --needed --noconfirm aylurs-gtk-shell-git wireplumber libgtop bluez bluez-utils btop networkmanager dart-sass wl-clipboard brightnessctl swww python upower pacman-contrib power-profiles-daemon gvfs gtksourceview3 libsoup3 grimblast-git wf-recorder-git hyprpicker matugen-bin python-gpustat hyprsunset-git ags-hyprpanel-git
-  fi
-  cp "$HOME/hyprdev/hyprpanel/autostart.conf" "$HOME/.config/hypr/"
-  sed -i "s/devin/$USER/" "$HOME/.config/hyprpanel/config.json"
-  sed -i "s/waybar/hyprpanel/" "$HOME/.config/hypr/keybinds.conf"
-  echo ">>> If you want to get weather data for your location"
-  echo ">>> Make a free account on https://weatherapi.com"
-  echo ">>> And paste the api key in the clock dashboard settings section"
-  echo ">>> You can find the settings in the menu (top left corner)"
-  sleep 5
-}
-
 installAurPackages() {
   local packages=("google-chrome" "xwaylandvideobridge" "openvpn-update-systemd-resolved" "lazydocker" "dms-shell-bin" "matugen" "cliphist" "cava" "qt6-multimedia-ffmpeg" "qt-heif-image-plugin" "luajit-tiktoken-bin" "ani-cli")
   for pkg in "${packages[@]}"; do
@@ -198,7 +182,6 @@ installAurPackages
 systemctl --user add-wants niri.service dms
 gum spin --spinner dot --title "Starting setup now..." -- sleep 2
 copy_config
-install_hyprpanel
 detect_nvidia
 installDeepCoolDriver
 configure_git
