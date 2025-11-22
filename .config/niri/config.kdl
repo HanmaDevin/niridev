@@ -1,3 +1,18 @@
+environment {
+    QT_QPA_PLATFORM "wayland"
+    DISPLAY null
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-size 24
+    hide-when-typing
+}
+
+xwayland-satellite {
+    path "xwayland-satellite"
+}
+
 input {
     keyboard {
         xkb {
