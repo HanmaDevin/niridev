@@ -80,8 +80,9 @@ layout {
 }
 
 // startup
-spawn-at-startup "protonvpn-app --start-minimized"
+spawn-sh-at-startup "protonvpn-app --start-minimized"
 spawn-at-startup "discord"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
 hotkey-overlay {
     skip-at-startup
@@ -134,11 +135,14 @@ binds {
         spawn "dms" "ipc" "call" "notifications" "toggle"; 
     }
 
+    Mod+I hotkey-overlay-title="Settings" { 
+        spawn "dms" "ipc" "call" "settings" "toggle"; 
+    }
     Mod+V hotkey-overlay-title="Clipboard Manager" { 
         spawn "dms" "ipc" "call" "clipboard" "toggle"; 
     }
     Mod+M hotkey-overlay-title="Task Manager" { 
-        spawn "dms" "ipc" "call" "processlist" "toggle"; 
+        spawn-sh "kitty -e btop";
     }
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
